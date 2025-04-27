@@ -1,0 +1,3 @@
+com.ums.bms.engine.processor.impl.RegexProcessor
+com.ums.bms.engine.processor.impl.MethodBindingProcessor
+com.ums.bms.engine.processor.impl.AdvancedMethodBindingProcessor
