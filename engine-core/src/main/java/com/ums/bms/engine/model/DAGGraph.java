@@ -5,16 +5,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.ums.bms.engine.utils.deser.NodeMapDeserializer;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * DAG图定义
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DAGGraph {
-    private String id;
-    private String name;
-    private String version;
+    @JsonDeserialize(using = NodeMapDeserializer.class)
     private Map<String, Node> nodes = new HashMap<>();
     private Map<String, Object> globalParameters = new HashMap<>();
     

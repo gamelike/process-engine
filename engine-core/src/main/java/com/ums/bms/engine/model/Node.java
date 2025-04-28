@@ -1,5 +1,6 @@
 package com.ums.bms.engine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,14 @@ public class Node {
     public enum NodeStatus {
         PENDING, RUNNING, COMPLETED, FAILED, SKIPPED
     }
+
+    public List<String> getDeps() {
+        if (deps == null) {
+            return new ArrayList<>();
+        }
+        return deps;
+    }
+
     /**
      * 获取参数值
      * 

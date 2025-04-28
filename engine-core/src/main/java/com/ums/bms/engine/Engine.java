@@ -5,9 +5,7 @@ import com.ums.bms.engine.model.DAGGraph;
 import com.ums.bms.engine.model.Node;
 import com.ums.bms.engine.parser.FlowConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +32,12 @@ public class Engine {
             throw new RuntimeException("Invalid DAG configuration");
         }
         // 执行DAG
-        while (!dag.isCompleted()) {
+        while (dag.isCompleted()) {
             List<Node> readyNodes = dag.getReadyNodes();
-            if (readyNodes.isEmpty() && !dag.isCompleted()) {
+            if (readyNodes.isEmpty() && dag.isCompleted()) {
                 log.error("No nodes are ready to execute, but DAG is not completed. Possible deadlock.");
                 throw new RuntimeException("Execution deadlock detected");
             }
-
             // 执行所有就绪的节点
             for (Node node : readyNodes) {
                 executeNode(node, ctx, dag, flowConfig.getGlobalParameters());
